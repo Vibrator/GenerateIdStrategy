@@ -1,0 +1,57 @@
+spring:
+  profiles:
+    active: local
+
+server:
+  port: 8090
+  #context-path: /rowid
+  connection-timeout: 20000
+  tomcat:
+    max-connections: 20000
+    max-threads: 20000
+    min-spare-threads: 2000
+    accept-count: 20000
+    uri-encoding: UTF-8
+  
+logging:
+  config: classpath:log4j2.xml
+  
+security:
+  basic:
+    enabled: false
+#  user:
+#    name: 6830
+#    password: handhand
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+management:
+  port: 9090
+  address: 127.0.0.1
+
+---
+spring:
+  profiles: local
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.255.128:3306/linkcrm?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: linkcrm
+    password: 111111
+  http:
+    encoding:
+      charset: UTF-8 
+      enabled: true
+      force: true
+  application: 
+    name: linkcrm-bus
+  redis:
+    host: 192.168.255.128
+    password: 78910jqk
+    port: 6379
+    pool:
+        max-active: -1
+        max-idle: 20
+        max-wait: 1000000
+    timeout: 100000
